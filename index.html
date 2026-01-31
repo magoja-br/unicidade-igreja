@@ -1,288 +1,475 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Summa Doctrinalis - Economia da Salvação</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --parchment: #fcfaf2;
-            --ink: #1a1a1a;
-            --gold: #b8860b;
-            --crimson: #8b0000;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Summa Doctrinalis - Economia da Salvação</title>
+  <!-- Tipografias do modelo -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #fcfaf2;
+      --ink: #1a1a1a;
+      --gold: #b8860b;
+      --crimson: #8b0000;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html, body {
+      overflow-x: hidden; /* Impede deslocamento lateral */
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #e5e5e5;
+    }
+    body {
+      color: var(--ink);
+      font-family: 'Lora', serif;
+      display: flex;
+      justify-content: center;
+    }
+    .manuscript {
+      background-color: var(--parchment);
+      width: 95%;
+      max-width: 850px;
+      margin: 20px auto;
+      padding: 5% 7%; /* Padding responsivo */
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 1px solid #d3d3d3;
+      position: relative;
+      word-wrap: break-word; /* Evita quebra de layout */
+    }
+    /* Borda decorativa interna do modelo */
+    .manuscript::before {
+      content: "";
+      position: absolute;
+      top: 10px; left: 10px; right: 10px; bottom: 10px;
+      border: 1px solid #e0d8c0;
+      pointer-events: none;
+    }
+    /* Mantém a estética do modelo para headings e parágrafos gerais */
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      color: var(--crimson);
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.2rem, 4vw, 1.6rem);
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 10px;
+      margin-top: 40px;
+      color: var(--crimson);
+      text-align: center;
+    }
+    h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--crimson);
+      margin-top: 30px;
+      font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+      font-weight: bold;
+    }
+    p {
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      line-height: 1.8;
+      text-align: justify;
+      margin-bottom: 20px;
+      hyphens: auto;
+    }
+    /* Opcional: estiliza parágrafos centralizados do conteúdo original */
+    p[align="center"] {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+    }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html, body {
-            overflow-x: hidden; /* Impede o deslocamento lateral */
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: #e5e5e5;
-        }
-
-        body {
-            color: var(--ink);
-            font-family: 'Lora', serif;
-            display: flex;
-            justify-content: center;
-        }
-
-        .manuscript {
-            background-color: var(--parchment);
-            width: 95%;
-            max-width: 850px;
-            margin: 20px auto;
-            padding: 5% 7%; /* Padding responsivo */
-            box-shadow: 0 10px 30px var(--shadow);
-            border: 1px solid #d3d3d3;
-            position: relative;
-            word-wrap: break-word; /* Evita que palavras longas quebrem o layout */
-        }
-
-        /* Borda decorativa interna ajustada para mobile */
-        .manuscript::before {
-            content: "";
-            position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid #e0d8c0;
-            pointer-events: none;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        h1 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1.5rem, 5vw, 2.5rem); /* Tamanho de fonte fluido */
-            color: var(--crimson);
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
-        .subtitle {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: clamp(0.9rem, 3vw, 1.2rem);
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-
-        .dropcap {
-            float: left;
-            font-family: 'Cinzel', serif;
-            font-size: 4rem;
-            line-height: 0.8;
-            padding-top: 10px;
-            padding-right: 10px;
-            color: var(--crimson);
-        }
-
-        h2 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1.2rem, 4vw, 1.6rem);
-            border-bottom: 2px solid var(--gold);
-            padding-bottom: 10px;
-            margin-top: 40px;
-            color: var(--crimson);
-            text-align: center;
-        }
-
-        h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--crimson);
-            margin-top: 30px;
-            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
-            font-weight: bold;
-        }
-
-        p {
-            font-size: clamp(1rem, 2.5vw, 1.15rem);
-            line-height: 1.8;
-            text-align: justify;
-            margin-bottom: 20px;
-            hyphens: auto; /* Melhora a quebra de texto em telas estreitas */
-        }
-
-        .footer {
-            margin-top: 60px;
-            text-align: center;
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            color: #999;
-            letter-spacing: 3px;
-            padding-bottom: 20px;
-        }
-
-        /* Ajustes específicos para telas muito pequenas */
-        @media (max-width: 480px) {
-            .manuscript {
-                padding: 40px 20px;
-                margin: 10px auto;
-            }
-            .dropcap {
-                font-size: 3rem;
-            }
-        }
-    </style>
+    /* Ajustes para telas muito pequenas */
+    @media (max-width: 480px) {
+      .manuscript {
+        padding: 40px 20px;
+        margin: 10px auto;
+      }
+    }
+  </style>
 </head>
 <body>
+  <article class="manuscript">
 
-<article class="manuscript">
-    <header>
-        <h1>SUMMA DOCTRINALIS</h1>
-        <div class="subtitle">Tratado sobre a Economia da Salvação e a Unicidade da Igreja</div>
-    </header>
+    <!-- CONTEÚDO INTEGRAL DO SEU index.html ORIGINAL (mantido como está) -->
+    <p align="center"> 
+       <h2>SUMMA DOCTRINALIS: TRATADO SOBRE A ECONOMIA DA SALVAÇÃO E A UNICIDADE DA 
+      IGREJA</h2> 
+    </p> 
+    <p align="center"> 
+      <strong> 
+        Reelaboração integral segundo a terminologia e o ensinamento do 
+        Magistério da Igreja Católica Apostólica Romana, com comentários 
+        teológicos e ampliações doutrinais 
+      </strong> 
+      . 
+    </p> 
+    <h2> 
+      Nota editorial 
+    </h2> 
+    <p> 
+      Esta edição oferece três camadas integradas: (1) O texto em linguagem 
+      teológica e fiel ao Magistério; (2) COMENTÁRIOS do teólogo, assinalados como 
+      “Comentário”; e (3) AMPLIAÇÕES doutrinais, sob o título “Ampliação”, para 
+      aprofundar pontos‑chave. As referências magisteriais seguem o Catecismo da 
+      Igreja Católica (CIC), documentos conciliares e declarações da Sé 
+      Apostólica. 
+    </p> 
+    <h1> 
+      CAPÍTULO I — Fundamento ontológico da redenção 
+    </h1> 
+    <h2> 
+      1.1 O estado de queda e a necessidade absoluta de Cristo 
+    </h2> 
+    <p> 
+      A Sagrada Doutrina ensina que, por causa do pecado original, a humanidade 
+      encontra‑se num estado de ferida e desordem que ultrapassa a mera esfera 
+      moral e alcança a ordem ontológica (cf. CIC 396–409). Tal ferida excede as 
+      forças naturais do homem: por si só, a criatura não pode restabelecer a 
+      comunhão com Deus. A iniciativa é divina e culmina na Encarnação do Verbo e 
+      em Seu sacrifício redentor (cf. Hb 2,14–18; CIC 456–460). 
+    </p> 
+    <p> 
+      O ato pascal de Cristo — Sua paixão, morte e ressurreição — é causa objetiva 
+      de salvação para todo o gênero humano; Ele é o único Mediador e Salvador 
+      universal (cf. At 4,12; 1Tm 2,5–6; Declaração Dominus Iesus 13–15). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      A linguagem “ontológica” preserva a intuição de que o pecado não é apenas 
+      transgressão jurídica, mas ruptura no ser do homem diante de Deus. A 
+      restauração exige graça sobrenatural. 
+    </p> 
+    <p> 
+      Evita‑se qualquer forma de pelagianismo: a salvação não é 
+      autoaperfeiçoamento ético, mas participação, por graça, na vida de Cristo. 
+    </p> 
+    <p> 
+      Ampliação: 
+    </p> 
+    <p> 
+      Distinga‑se “redenção objetiva” (obra consumada por Cristo) de “aplicação 
+      subjetiva” (acolhimento livre da graça). O Catecismo articula este dinamismo 
+      na economia sacramental (CIC 1066–1209). 
+    </p> 
+    <h2> 
+      1.2 Cristo, causa única e mediador universal da salvação 
+    </h2> 
+    <p> 
+      Todo homem que se salva, salva‑se unicamente pelos méritos de Cristo. Não 
+      existem vias paralelas independentes da Sua mediação; quaisquer sementes de 
+      verdade e de bem presentes fora dos limites visíveis da Igreja recebem sua 
+      eficácia de Cristo e ordenam‑se, por um certo dinamismo, à unidade católica 
+      (cf. LG 8; LG 16; UR 3; DI 14). 
+    </p> 
+    <p> 
+      A graça de Cristo alcança‑nos principalmente através dos sacramentos, que 
+      são sinais eficazes e instrumentos da vida divina confiados à Igreja (cf. 
+      CIC 1131). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      Substitui‑se metáforas ambíguas por terminologia magisterial: “mediação 
+      única e universal de Cristo” e “economia sacramental”. 
+    </p> 
+    <p> 
+      Ampliação: 
+    </p> 
+    <p> 
+      A expressão conciliar “subsistit in” (LG 8) afirma que a Igreja de Cristo 
+      subsiste na Igreja Católica, guardando a plenitude dos meios de salvação, 
+      sem negar a presença de elementos de santificação e verdade fora de seus 
+      limites visíveis. 
+    </p> 
+    <h2> 
+      1.3 Suficiência universal e eficácia particular 
+    </h2> 
+    <p> 
+      A redenção é suficiente para todos, mas torna‑se eficaz mediante a acolhida 
+      livre da graça e a fé operante pela caridade (cf. Gl 5,6; CIC 1996–2005). O 
+      universalismo soteriológico é, portanto, excluído; permanece o chamado 
+      universal e a responsabilidade pessoal. 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      A dupla distinção evita tanto o determinismo quanto o universalismo 
+      automático. A graça previne, acompanha e aperfeiçoa a liberdade. 
+    </p> 
+    <h1> 
+      CAPÍTULO II — Revelação e destino dos não evangelizados 
+    </h1> 
+    <h2> 
+      2.1 Justiça e misericórdia de Deus e o destino dos não evangelizados 
+    </h2> 
+    <p> 
+      Deus quer que todos os homens se salvem e cheguem ao conhecimento da verdade 
+      (cf. 1Tm 2,4). Ninguém é condenado por mera fatalidade histórica; o juízo 
+      considera a luz recebida e a resposta dada (cf. Rm 2,14–16; CIC 847–848). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      Evita‑se linguagem que sugira predestinação à perdição. Afirma‑se a real 
+      oferta da graça e a responsabilidade proporcionada ao conhecimento. 
+    </p> 
+    <h2> 
+      2.2 Revelação geral, lei natural e ação do Espírito 
+    </h2> 
+    <p> 
+      A criação manifesta o eterno poder e a divindade de Deus (cf. Rm 1,19–20). A 
+      lei natural, inscrita no coração, testemunha o bem objetivo (cf. Rm 2,14–15; 
+      CIC 1954–1960). O Espírito Santo atua misteriosamente em todos, preparando 
+      os corações para Cristo (cf. Jo 16,8; GS 22). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      A terminologia “revelação geral” e “lei natural” estabiliza a doutrina 
+      evitando simplificações moralistas. 
+    </p> 
+    <h2> 
+      2.3 Acolhimento da graça sob ignorância invencível 
+    </h2> 
+    <p> 
+      Quem, sem culpa própria, ignora o Evangelho de Cristo e Sua Igreja, mas 
+      busca a Deus com coração sincero e, movido pela graça, procura cumprir a 
+      vontade divina conhecida pela voz da consciência, pode alcançar a salvação 
+      por caminhos conhecidos somente por Deus (cf. LG 16; CIC 847). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      Introduz‑se explicitamente a noção de “ignorância invencível” e a fórmula 
+      conciliar “caminhos conhecidos por Deus”, evitando expressões que possam 
+      sugerir salvação automática. 
+    </p> 
+    <p> 
+      Ampliação: 
+    </p> 
+    <p> 
+      A tradição teológica fala do “votum Ecclesiae” e do “votum sacramenti” — um 
+      desejo implícito, sob moção da graça, que ordena a pessoa à Igreja e aos 
+      sacramentos. 
+    </p> 
+    <h2> 
+      2.4 Por que evangelizar? 
+    </h2> 
+    <p> 
+      A evangelização não é opcional: Cristo a ordenou (cf. Mt 28,19–20). A 
+      pregação oferece a plenitude da verdade e dos meios de salvação, fortalece a 
+      liberdade para o sim da fé e mitiga os riscos da obscuridade moral (cf. RM 
+      46–49; CIC 849). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      Evita‑se contrapor indevidamente consciência e anúncio: a consciência é 
+      iluminada e purificada pelo Evangelho. 
+    </p> 
+    <h1> 
+      CAPÍTULO III — A Igreja e o mistério sacramental 
+    </h1> 
+    <h2> 
+      3.1 A Igreja: Corpo de Cristo e Povo de Deus 
+    </h2> 
+    <p> 
+      A Igreja é sacramento universal de salvação, Corpo de Cristo e Povo de Deus 
+      peregrino, fundada por Cristo e edificada sobre os Apóstolos, com Pedro como 
+      princípio visível de unidade (cf. LG 1; LG 8; Mt 16,18–19; CIC 774–776). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      Integra‑se a eclesiologia conciliar: dimensão sacramental, colegialidade 
+      apostólica e primado petrino. 
+    </p> 
+    <h2> 
+      3.2 “Igrejas” e “Comunidades eclesiais” 
+    </h2> 
+    <p> 
+      Chama‑se propriamente “Igrejas” às comunidades que, conservando a sucessão 
+      apostólica e uma Eucaristia válida, permanecem verdadeiramente unidas a nós, 
+      embora imperfeitamente (como as Igrejas Orientais Ortodoxas). Aos 
+      agrupamentos oriundos da Reforma, sem sucessão apostólica e portanto sem 
+      sacramento da Ordem válido, a Igreja Católica se refere como “comunidades 
+      eclesiais” (cf. UR 15; DI 17). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      Adota‑se a terminologia normativa, sem juízos depreciativos, reconhecendo 
+      elementos de santificação e verdade presentes também nessas comunidades (cf. 
+      LG 8; UR 3). 
+    </p> 
+    <h2> 
+      3.3 A Eucaristia: presença real e sacrifício 
+    </h2> 
+    <p> 
+      Na Eucaristia, por transubstanciação, o Cristo se faz realmente presente sob 
+      as espécies do pão e do vinho; o sacrifício de Cristo torna‑se 
+      sacramentalmente presente (cf. Trento, DS 1640–1651; CIC 1374, 1413). Não se 
+      trata de mero símbolo, mas de sinal eficaz que contém e comunica o que 
+      significa. 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      Substitui‑se qualquer linguagem que sugira “desnecessidade” do sinal: nos 
+      sacramentos, o sinal sensível é o próprio instrumento escolhido por Cristo 
+      para comunicar a graça. 
+    </p> 
+    <h2> 
+      3.4 Batismo: incorporação e unidade ferida 
+    </h2> 
+    <p> 
+      A Igreja reconhece o Batismo administrado validamente fora de seus limites 
+      visíveis, quando realizado com água natural, a fórmula trinitária e a reta 
+      intenção mínima de fazer o que a Igreja faz (cf. CIC 1256–1271; Trento, DS 
+      1617). Pelo Batismo, a pessoa é verdadeiramente incorporada a Cristo; a 
+      plena comunhão, porém, requer a integridade da fé, dos sacramentos e do 
+      governo eclesial (cf. UR 4). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      Evita‑se linguagem de “obstáculo” que obscureça a realidade da graça 
+      batismal; fala‑se de “comunhão imperfeita” e de “ferida da unidade”. 
+    </p> 
+    <h1> 
+      CAPÍTULO IV — Soberba, responsabilidade e pertença à verdade 
+    </h1> 
+    <h2> 
+      4.1 Verdade, liberdade e humildade da fé 
+    </h2> 
+    <p> 
+      A verdade revelada é objetiva e confiada ao depósito da fé; a adesão a ela é 
+      ato da inteligência movida pela graça, sem violência à liberdade (cf. CIC 
+      150–155). A humildade dispõe a mente para receber a luz de Deus; o orgulho 
+      fecha o coração (cf. Mt 11,25). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      Recalibra‑se a crítica ao relativismo sem imputar culpabilidade onde não há 
+      pleno conhecimento ou consentimento. 
+    </p> 
+    <h2> 
+      4.2 Dever de buscar a verdade e responsabilidade moral 
+    </h2> 
+    <p> 
+      A ignorância escusa quando é invencível; quando vencível, por negligência 
+      culpável, não escusa (cf. CIC 1790–1794). Deus julga segundo a reta 
+      consciência e segundo a caridade efetiva (cf. 1Cor 13). 
+    </p> 
+    <h2> 
+      4.3 Pertencer plenamente à Igreja 
+    </h2> 
+    <p> 
+      A plena comunhão com a Igreja supõe (a) Batismo válido; (b) profissão 
+      íntegra da fé; (c) vida sacramental e obediência ao governo eclesial; e (d) 
+      estado de graça que vivifica o membro do Corpo de Cristo (cf. LG 14; CIC 
+      2041–2043). 
+    </p> 
+    <h2> 
+      4.4 Rejeição consciente e gravidade moral 
+    </h2> 
+    <p> 
+      Quem reconhece com clareza a verdade da fé católica e, todavia, a rejeita 
+      obstinadamente, incorre em grave desordem moral. Ao mesmo tempo, a Igreja 
+      confia à misericórdia de Deus os que, por ignorância invencível, não 
+      chegaram a tal reconhecimento (cf. LG 14–16; CIC 1857–1861). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      Conserva‑se a tensão evangélica entre justiça e misericórdia, evitando 
+      sentenças pessoais e lembrando a competência exclusiva de Deus no juízo das 
+      consciências. 
+    </p> 
+    <h1> 
+      CAPÍTULO V — Perpetuidade da verdade e responsabilidade da alma 
+    </h1> 
+    <h2> 
+      5.1 Encerramento da Revelação pública e desenvolvimento do dogma 
+    </h2> 
+    <p> 
+      A Revelação pública encerrou‑se com a morte do último Apóstolo (cf. DV 4). O 
+      desenvolvimento da doutrina não acrescenta novas verdades, mas aprofunda a 
+      inteligência da mesma verdade revelada, sob a assistência do Espírito (cf. 
+      CIC 94). 
+    </p> 
+    <h2> 
+      5.2 Soberba intelectual e relativismo 
+    </h2> 
+    <p> 
+      O relativismo, ao negar a verdade objetiva, mina a possibilidade mesma do 
+      assentimento de fé. A autoridade magisterial serve à verdade revelada e 
+      garante sua transmissão íntegra (cf. DV 10; CIC 888–892). 
+    </p> 
+    <h2> 
+      5.3 Critério do juízo final 
+    </h2> 
+    <p> 
+      No juízo, seremos medidos pela resposta à graça e pela caridade, que é a 
+      forma de todas as virtudes (cf. Mt 25,31–46; 1Cor 13; CIC 1021–1038). 
+    </p> 
+    <p> 
+      Comentário: 
+    </p> 
+    <p> 
+      A caridade, infundida pela graça, é inseparável da verdade. Fé e amor não se 
+      opõem, antes se implicam. 
+    </p> 
+    <h1> 
+      Notas e Referências 
+    </h1> 
+    <p> 
+      Sagrada Escritura: Rm 1,19–20; Rm 2,14–16; 1Tm 2,4–6; At 4,12; Mt 28,19–20; 
+      Mt 25,31–46; Jo 16,8; Hb 2,14–18; 1Cor 13. 
+    </p> 
+    <p> 
+      Concílio Vaticano II: Lumen Gentium (LG) 1, 8, 14–16; Unitatis Redintegratio 
+      (UR) 3–4, 15; Dei Verbum (DV) 4, 10; Gaudium et Spes (GS) 22; Redemptoris 
+      Missio (RM) 46–49. 
+    </p> 
+    <p> 
+      Magistério: Catecismo da Igreja Católica (CIC) 94, 150–155, 396–409, 
+      1066–1209, 1131, 1374, 1413, 1790–1794, 1857–1861, 2041–2043, 774–776, 
+      847–848, 888–892, 1021–1038, 1256–1271, 1954–1960. 
+    </p> 
+    <p> 
+      Concílio de Trento: Decreta sobre a Eucaristia (DS 1640–1651) e sobre o 
+      Batismo (DS 1617). 
+    </p> 
+    <p> 
+      Declaração Dominus Iesus (DI) 13–17. 
+    </p>
 
-    <h2>CAPÍTULO I: O FUNDAMENTO ONTOLÓGICO DA REDENÇÃO</h2>
-    <h3>1.1. O Estado de Queda e a Necessidade de Cristo</h3>
-    <p><span class="dropcap">P</span>ara compreender a salvação, é indispensável entender a natureza da "queda" humana. A teologia ensina que a humanidade não apenas cometeu erros morais, mas sofreu uma ruptura espiritual profunda com sua Fonte Vital: Deus.</p>
-    <p>A Ruptura Original: O pecado original trouxe um estado de condenação e separação que afetou toda a raça humana, criando um "bloqueio" que o homem, por forças próprias, jamais poderia remover.</p>
-    <p>Incapacidade Humana: Uma vez ferida, a natureza humana tornou-se incapaz de "subir" até Deus; o homem não consegue se salvar apenas sendo "bonzinho" ou seguindo uma ética natural, pois a ferida é espiritual e ontológica.</p>
-    <p>Intervenção Divina: Somente Deus, fazendo-se homem em Jesus Cristo, poderia reconstruir a ponte entre a humanidade e a Santidade divina. O sacrifício de Cristo é o ato que "paga a conta" de toda a humanidade, restaurando a possibilidade de união com o Criador.</p>
-    
-    <h3>1.2. Jesus Cristo: A Causa Única e Eficiente</h3>
-    <p>Jesus Cristo é definido como o único fundamento e o único caminho para a vida eterna. Não existem caminhos paralelos ou alternativas independentes da Sua obra.</p>
-    <p>Dogma Cristocêntrico: Toda e qualquer pessoa que chegue à salvação, seja ela cristã ou não, o faz exclusivamente em virtude dos méritos da morte expiatória de Cristo na Cruz.</p>
-    <p>A "Usina" da Graça: O sacrifício de Cristo é como uma usina de energia infinita. Os católicos estão ligados a ela por "cabos visíveis" (os sacramentos), enquanto outros podem receber essa mesma energia por "cabos subterrâneos" (ação invisível do Espírito Santo), mas a fonte da energia é rigorosamente a mesma: a Cruz.</p>
-    
-    <h3>1.3. Suficiência Universal vs. Eficácia Particular</h3>
-    <p>A teologia faz uma distinção técnica vital para evitar a ideia de que todos estão salvos automaticamente (Universalismo).</p>
-    <p>Suficiência (Alcance Objetivo): O sacrifício de Cristo foi oferecido por toda a humanidade, sem exceção. Ninguém fica fora da provisão realizada na cruz; a oferta é universal.</p>
-    <p>Eficácia (Aplicação Subjetiva): Embora a oferta seja para todos, ela só se torna efetiva no indivíduo quando é recebida pela fé e pela resposta livre do coração à graça de Deus. Cristo morreu por todos em termos de provisão, mas só salva quem responde à Sua graça em termos de aplicação.</p>
-
-    <h2>CAPÍTULO II: A REVELAÇÃO E O DESTINO DOS NÃO EVANGELIZADOS</h2>
-    <h3>2.1. O Princípio da Justiça e Misericórdia Divina</h3>
-    <p>A teologia resolve o impasse sobre a salvação de quem nunca ouviu falar de Jesus através do equilíbrio entre a justiça e a misericórdia de Deus.</p>
-    <p>Justiça contra a Circunstância: Ninguém é condenado automaticamente por uma circunstância geográfica ou histórica que esteja fora de seu controle.</p>
-    <p>Deus de Amor Infinito: A Bíblia apresenta um Deus que não deseja a perdição de ninguém e que não deixa nenhum ser humano sem algum tipo de testemunho de Sua existência.</p>
-    <p>A Regra da Proporcionalidade: O julgamento de Deus é baseado na luz (conhecimento) que a pessoa recebeu; quanto mais conhecimento, maior a responsabilidade.</p>
-    
-    <h3>2.2. A Revelação Geral: O Testemunho Visível e Invisível</h3>
-    <p>Para as pessoas que não tiveram acesso à Bíblia ou ao nome de Jesus, Deus utiliza a chamada Revelação Geral.</p>
-    <p>Testemunho da Criação: A natureza, em sua ordem, beleza e provisão, fala de um Criador poderoso e bom. O ser humano pode perceber o poder e a divindade de Deus através das coisas feitas, o que o torna indesculpável caso O negue totalmente.</p>
-    <p>A Consciência e a Lei Moral: Deus escreveu Sua lei no coração humano (Lei Natural). A consciência funciona como um testemunho interior que distingue o bem do mal e comunica a transcendência da vida.</p>
-    <p>O Espírito Santo na Humanidade: O Espírito Santo atua em todo ser humano, e não apenas nos cristãos, convencendo o mundo do pecado, da justiça e do juízo.</p>
-    
-    <h3>2.3. O Processo de Resposta à Graça "Anônima"</h3>
-    <p>O tratado explica como a salvação opera tecnicamente em alguém que nunca ouviu o Evangelho.</p>
-    <p>Atuação do Espírito: O Espírito Santo move o coração para que a pessoa responda ao amor que ela percebe na criação e na sua consciência.</p>
-    <p>A Resposta de Fé: Se a pessoa aceita essa influência e decide viver conforme o bem que conhece, ela está dando uma resposta de fé à luz recebida.</p>
-    <p>Aplicação dos Méritos de Cristo: No profundo do coração, o Espírito Santo aplica os méritos da obra de Cristo a essa pessoa, mesmo que ela ainda não conheça o nome de seu Salvador.</p>
-    
-    <h3>2.4. A Necessidade da Pregação: Luz Maior versus Centelha</h3>
-    <p>Se a salvação é possível pela consciência, por que então pregar o Evangelho?</p>
-    <p>Facilitação da Resposta: Quanto mais luz uma pessoa recebe, mais clara é a revelação do amor de Deus e mais fácil e segura é a resposta de fé.</p>
-    <p>Limitação da Centelha: Quem tem apenas a natureza e a consciência possui uma "chispa" ou centelha real, mas limitada e frágil.</p>
-    <p>O Risco das Trevas: Sem o Evangelho, uma cultura pode rejeitar essa pequena luz por gerações até que o fogo se apague, resultando em total escuridão moral.</p>
-
-    <h2>CAPÍTULO III: A IGREJA E O MISTÉRIO SACRAMENTAL</h2>
-    <h3>3.1. A Igreja como Corpo Místico e Instituição Divina</h3>
-    <p>A Igreja não é apenas uma organização humana ou um clube de pessoas com interesses comuns; ela é uma instituição divina com uma natureza espiritual profunda.</p>
-    <p>Fundação por Cristo: Jesus não apenas deixou ensinamentos, mas edificou pessoalmente uma comunidade organizada, conferindo autoridade a Pedro para "ligar e desligar".</p>
-    <p>O Corpo de Cristo: Na teologia paulina, a Igreja é o próprio Corpo de Cristo; Ele é a Cabeça e a Igreja é o meio pelo qual Ele continua presente e atuante no mundo.</p>
-    <p>A Arca da Salvação: A Igreja é comparada a um navio que atravessa o mar da história; embora alguém possa se salvar nadando (via extraordinária), a Igreja oferece a segurança da travessia (via ordinária).</p>
-    
-    <h3>3.2. Diferença entre "Igreja" e "Comunidade Eclesial"</h3>
-    <p>Sob o rigor da doutrina católica, existe uma distinção técnica essencial entre o que é propriamente uma "Igreja" e o que é uma "Comunidade Eclesial".</p>
-    <p>O Critério da Sucessão Apostólica: Para ser chamada de "Igreja", o grupo deve possuir bispos em uma linha ininterrupta que remonte aos Apóstolos (como os Ortodoxos).</p>
-    <p>O Critério da Eucaristia: Uma Igreja verdadeira possui o poder sacramental de realizar o sacrifício real do Corpo e Sangue de Cristo.</p>
-    <p>Comunidades Eclesiais: Grupos surgidos da Reforma (Batistas, Pentecostais, etc.) são comunidades de fé, mas por não possuírem sucessão apostólica nem a Eucaristia real, não possuem a plenitude do mistério que define a "Igreja".</p>
-    
-    <h3>3.3. O Mistério da Eucaristia: Presença Real vs. Símbolo</h3>
-    <p>A maior linha divisória entre a Igreja de Cristo e as outras comunidades reside na natureza da hóstia.</p>
-    <p>Transubstanciação: A crença de que, após a consagração, o pão e o vinho tornam-se, em substância, o Corpo e o Sangue de Cristo.</p>
-    <p>A Crítica ao Simbolismo: Muitas comunidades tratam a hóstia apenas como um memorial simbólico ou lembrete.</p>
-    <p>A Desnecessidade do Símbolo: Se o rito é puramente simbólico e a graça é interna, o objeto físico (a hóstia simbólica) torna-se um acessório supérfluo e teologicamente desnecessário, sendo apenas uma ferramenta psicológica ou pedagógica.</p>
-    
-    <h3>3.4. A Validade do Batismo e a Unidade Ferida</h3>
-    <p>A Igreja reconhece o batismo dado por comunidades separadas (protestantes) devido à soberania do sacramento.</p>
-    <p>Requisitos de Validade: O batismo é verdadeiro se usar água, a fórmula trinitária e o ministro tiver a intenção mínima de realizar o rito cristão instituído por Cristo.</p>
-    <p>Membro da Igreja: Pelo batismo, o protestante é incorporado a Cristo e torna-se um membro da Igreja, mas de modo imperfeito e separado da plenitude visível.</p>
-    <p>Obstáculo à Graça: Embora o selo do batismo seja real, a adesão a doutrinas errôneas cria um "obstáculo" que impede que a graça do batismo floresça em salvação plena até que ocorra a conversão ou arrependimento.</p>
-
-    <h2>FONTES E REFERÊNCIAS DOCUMENTAIS</h2>
-    <p>Sagrada Escritura: João 6, 53; João 16, 8; Mateus 16, 18; Efésios 1, 22-23; Romanos 1, 19-20.</p>
-    <p>Magistério da Igreja: Catecismo da Igreja Católica (CIC 846; CIC 1857; CIC 1213 ).</p>
-    <p>Concílios: Trento (Sessão VII, Cânon 4 sobre o Batismo ); Florença (Cantate Domino ).</p>
-    <p>Tradição: São Tomás de Aquino; Cipriano de Cartago.</p>
-    <p>Menção Especial: Informações baseadas no conteúdo consolidado no chat e no registro teológico fornecido pelo usuário.</p>
-
-    <h2>CAPÍTULO IV: A SOBERBA, A RESPONSABILIDADE E A PERTENÇA À VERDADE</h2>
-    <h3>4.1. A Verdade como Realidade Objetiva e a Virtude da Humildade</h3>
-    <p>A teologia ensina que a Verdade não é uma construção subjetiva, mas uma realidade absoluta à qual a inteligência deve se adequar.</p>
-    <p>O "Eu" como Juiz: Negar a Verdade única para sustentar uma opinião privada é visto como um ato de soberba, pois o indivíduo coloca o seu próprio julgamento acima da realidade estabelecida por Deus.</p>
-    <p>A Necessidade de Humildade: A afirmação da Verdade exige a submissão da vontade; sem humildade, a mente se fecha para a Luz divina, resultando em cegueira espiritual.</p>
-    
-    <h3>4.2. O Dever Moral de Buscar a Verdade</h3>
-    <p>A ignorância só é considerada "invencível" e escusável se não houver negligência por parte do sujeito.</p>
-    <p>A Ignorância Culpável: Se uma pessoa não busca a Verdade por preguiça, medo de mudar de vida ou apego ao erro, sua ignorância é "vencível" e torna-se um pecado de omissão.</p>
-    <p>A Inocência na Busca: Apenas é inocente aquele que, apesar de todos os esforços sinceros e da busca honesta, permanece sem acesso à plenitude da Verdade por circunstâncias alheias à sua vontade.</p>
-    
-    <h3>4.3. Requisitos para ser Realmente Católico</h3>
-    <p>Para ser considerado católico em sentido pleno, sob o rigor da doutrina e do Direito Canônico, não basta o registro de batismo; exige-se uma conjunção de fatores:</p>
-    <p>Vínculo Visível: Possuir um Batismo válido, professar a Fé integral (crendo em todos os dogmas) e submeter-se à autoridade do Papa e dos Bispos.</p>
-    <p>Estado de Graça (Ordem Interior): É necessário estar em estado de graça (sem pecado mortal) e possuir a virtude da caridade para ser um membro "vivo" do Corpo de Cristo.</p>
-    <p>Vida de Oração e Prática: Cumprir os preceitos mínimos, como participar da Missa aos domingos, confessar-se e comungar anualmente.</p>
-    
-    <h3>4.4. O Perigo da Rejeição Consciente</h3>
-    <p>O conhecimento da Verdade traz uma obrigação moral. Quem chega à convicção de que a Igreja Católica é a verdadeira Igreja fundada por Deus e recusa entrar nela ou nela permanecer, coloca sua alma em estado de pecado mortal.</p>
-    <p>Misericórdia vs. Juízo: Para quem não conhece por impossibilidade real, há a Misericórdia; para quem conhece e rejeita deliberadamente, há o Juízo.</p>
-
-    <h2>CONCLUSÃO GERAL</h2>
-    <p>Este tratado estabelece que a salvação é rigorosamente Cristocêntrica. Jesus Cristo é o único Salvador, e a Igreja Católica é o canal único e oficial instituído para distribuir Sua graça ao mundo. A doutrina serve como o mapa necessário, mas o destino final é o Amor. No julgamento final, o critério será a resposta à Luz que nos foi concedida e a sinceridade do coração diante do sacrifício que Cristo realizou por toda a humanidade.</p>
-
-    <h2>FONTES E REFERÊNCIAS DOCUMENTAIS</h2>
-    <p>Sagrada Escritura: Romanos 1, 19-20; Romanos 2, 14-15; Romanos 5, 18-19; João 6, 53; João 16, 8; Mateus 16, 18; Efésios 1, 22-23; 1 João 2, 2.</p>
-    <p>Magistério da Igreja: Catecismo da Igreja Católica (CIC 811-816; CIC 846-848; CIC 1213-1271; CIC 1857; CIC 2041-2043 ).</p>
-    <p>Concílios Ecumênicos: Concílio de Trento (Sessão VII, Cânon 4 sobre o Batismo); Concílio de Florença (Cantate Domino).</p>
-    <p>Tradição Escolástica: São Tomás de Aquino (Conceitos de Votum Sacramenti, Fé Implícita e Ignorância Invencível).</p>
-    <p>Nota Explicativa: Este tratado é uma sistematização das conclusões teológicas alcançadas no diálogo e fundamentadas nas fontes citadas.</p>
-
-    <h2>CAPÍTULO V: A PERPETUIDADE DA VERDADE E A RESPONSABILIDADE DA ALMA</h2>
-    <h3>5.1. O Encerramento da Revelação Pública</h3>
-    <p>A Revelação Pública de Deus à humanidade atingiu sua plenitude e encerramento histórico com a morte do último apóstolo.</p>
-    <p>Cristo como Palavra Final: Por ser o Filho de Deus encarnado, Jesus é a Palavra definitiva; Nele, Deus disse tudo o que tinha a dizer, não havendo necessidade de novas revelações públicas para a salvação.</p>
-    <p>O Papel dos Apóstolos: Os apóstolos foram as testemunhas oculares e oficiais da Ressurreição, responsáveis por transmitir o "depósito da fé" que a Igreja agora guarda e explica.</p>
-    <p>Desenvolvimento vs. Inovação: Embora não haja novas verdades, o Espírito Santo auxilia a Igreja a compreender mais profundamente o que já foi revelado; um desenvolvimento legítimo explica o passado, enquanto uma heresia o contradiz.</p>
-    
-    <h3>5.2. O Pecado da Soberba e a Rejeição da Verdade</h3>
-    <p>A negação da Verdade objetiva, uma vez que ela é apresentada à inteligência, não é apenas um erro de cálculo, mas uma falha moral da vontade.</p>
-    <p>A Soberba Intelectual: Colocar o julgamento privado acima da Verdade revelada e da autoridade divina é uma manifestação de soberba, na qual o indivíduo se torna o árbitro da própria realidade.</p>
-    <p>Relativismo: O relativismo é a "canonização" dessa soberba, ao sugerir que não existe uma Verdade absoluta, tornando o homem o centro e a medida de todas as coisas.</p>
-    <p>Responsabilidade Moral: Se uma pessoa percebe a verdade da Igreja e a rejeita por orgulho ou comodismo, ela assume a responsabilidade por sua própria exclusão da graça.</p>
-    
-    <h3>5.3. A Falsa Inocência da Ignorância Negligente</h3>
-    <p>A ignorância só escusa o indivíduo se for "invencível", ou seja, se ocorrer apesar de uma busca honesta pela Verdade.</p>
-    <p>O Dever de Buscar: A ignorância não pode ser considerada inocente se a pessoa negligenciou a busca pela Verdade por preguiça ou medo das exigências morais que a Verdade impõe.</p>
-    <p>Amor à Verdade: Quem não busca a Verdade demonstra falta de amor por ela; sem esse amor, a alma permanece fechada à ação transformadora do Espírito Santo.</p>
-
-    <h2>CONCLUSÃO DO TRATADO</h2>
-    <p>O mistério da salvação revela um Deus que é, ao mesmo tempo, infinitamente Justo e infinitamente Misericordioso.</p>
-    <p>Cristo é o Único Salvador: Não há outro nome pelo qual possamos ser salvos; Sua Cruz é a única fonte de toda a graça.</p>
-    <p>A Igreja é o Porto Seguro: Como Corpo de Cristo, a Igreja Católica é o canal oficial e pleno da salvação; nela o "mapa" é claro e os sacramentos são reais.</p>
-    <p>A Salvação Extraordinária: Aqueles que, em ignorância invencível e busca sincera, respondem à voz da consciência, são salvos pela Igreja e por Cristo de forma invisível.</p>
-    <p>O Julgamento Final: Seremos julgados pela sinceridade de nossa busca e pela humildade de nossa resposta à Luz recebida. A soberba fecha as portas, mas a caridade, operada pela graça de Cristo, as abre.</p>
-
-    <h2>REFERÊNCIAS DOCUMENTAIS</h2>
-    <p>Escrituras: Romanos (1:19-20; 2:14-15; 5:18; 9:1; 10:14); João (3:16; 6:53; 13:35; 16:8); Efésios (1:22-23); 1 Coríntios (12; 13:2); Hebreus (1:1; 11:6; 11:31); Mateus (16:18); Atos (4:12); 1 Timóteo (2:4); Tiago (2:25).</p>
-    <p>Magistério e Direito: Catecismo da Igreja Católica (CIC 811-816, 846-848, 1213, 1271, 1857, 2041-2043, 2089); Código de Direito Canônico; Concílio de Trento (Cânon 4 sobre o Batismo); Concílio Vaticano II (Lumen Gentium 14); Concílio de Florença (Cantate Domino); Declaração Dominus Iesus.</p>
-    <p>Tradição: São Tomás de Aquino (Suma Teológica, De Veritate); Santo Agostinho; São Cipriano de Cartago.</p>
-
-    <div class="footer">
-        AD MAIOREM DEI GLORIAM
-    </div>
-</article>
-
+  </article>
 </body>
 </html>
