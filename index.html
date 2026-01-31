@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Summa Doctrinalis - Economia da Salvação</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
@@ -14,42 +14,57 @@
             --shadow: rgba(0, 0, 0, 0.1);
         }
 
-        body {
-            background-color: #e5e5e5;
-            color: var(--ink);
-            font-family: 'Lora', serif;
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            overflow-x: hidden; /* Impede o deslocamento lateral */
+            width: 100%;
             margin: 0;
             padding: 0;
+            background-color: #e5e5e5;
+        }
+
+        body {
+            color: var(--ink);
+            font-family: 'Lora', serif;
             display: flex;
             justify-content: center;
         }
 
         .manuscript {
             background-color: var(--parchment);
+            width: 95%;
             max-width: 850px;
-            margin: 40px 20px;
-            padding: 80px;
+            margin: 20px auto;
+            padding: 5% 7%; /* Padding responsivo */
             box-shadow: 0 10px 30px var(--shadow);
             border: 1px solid #d3d3d3;
             position: relative;
+            word-wrap: break-word; /* Evita que palavras longas quebrem o layout */
         }
 
+        /* Borda decorativa interna ajustada para mobile */
         .manuscript::before {
             content: "";
             position: absolute;
-            top: 20px; left: 20px; right: 20px; bottom: 20px;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
             border: 1px solid #e0d8c0;
             pointer-events: none;
         }
 
         header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 5vw, 2.5rem); /* Tamanho de fonte fluido */
             color: var(--crimson);
             margin-bottom: 10px;
             letter-spacing: 2px;
@@ -58,7 +73,7 @@
         .subtitle {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 1.2rem;
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
             color: var(--gold);
             margin-bottom: 20px;
         }
@@ -67,18 +82,18 @@
             float: left;
             font-family: 'Cinzel', serif;
             font-size: 4rem;
-            line-height: 1;
-            padding-top: 4px;
-            padding-right: 8px;
+            line-height: 0.8;
+            padding-top: 10px;
+            padding-right: 10px;
             color: var(--crimson);
         }
 
         h2 {
             font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
             border-bottom: 2px solid var(--gold);
             padding-bottom: 10px;
-            margin-top: 50px;
+            margin-top: 40px;
             color: var(--crimson);
             text-align: center;
         }
@@ -87,24 +102,37 @@
             font-family: 'Playfair Display', serif;
             color: var(--crimson);
             margin-top: 30px;
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
             font-weight: bold;
         }
 
         p {
-            font-size: 1.15rem;
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
             line-height: 1.8;
             text-align: justify;
             margin-bottom: 20px;
+            hyphens: auto; /* Melhora a quebra de texto em telas estreitas */
         }
 
         .footer {
-            margin-top: 80px;
+            margin-top: 60px;
             text-align: center;
             font-family: 'Cinzel', serif;
             font-size: 0.8rem;
             color: #999;
             letter-spacing: 3px;
+            padding-bottom: 20px;
+        }
+
+        /* Ajustes específicos para telas muito pequenas */
+        @media (max-width: 480px) {
+            .manuscript {
+                padding: 40px 20px;
+                margin: 10px auto;
+            }
+            .dropcap {
+                font-size: 3rem;
+            }
         }
     </style>
 </head>
